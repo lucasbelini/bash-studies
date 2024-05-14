@@ -13,7 +13,9 @@ done
 
 # Função para exibir a lista de animais e contar votos
 exibir_votacao() {
+    clear
     echo "Escolha seu animal favorito:"
+    echo "--------------------------"
     for (( i=0; i<${#animais[@]}; i++ )); do
         echo "$(($i+1)). ${animais[$i]}"
     done
@@ -21,18 +23,20 @@ exibir_votacao() {
 
 # Função para registrar votos
 registrar_voto() {
-    read -p "Digite o número correspondente ao seu animal favorito: " voto
+    read -p "Digite o número do seu animal favorito: " voto
     if [[ $voto =~ ^[0-9]+$ && $voto -ge 1 && $voto -le ${#animais[@]} ]]; then
         animal_votado=${animais[$(($voto-1))]}
         ((votos["$animal_votado"]++))
+        clear
         echo "Seu voto para $animal_votado foi registrado!"
     else
-        echo "Opção inválida. Por favor, digite o número correspondente ao seu animal favorito."
+        echo "Opção inválida. Por favor, digite o número do seu animal favorito."
     fi
 }
 
 # Função para exibir resultado da votação
 exibir_resultado() {
+    clear
     echo "--------------------------"
     echo "Resultado da votação:"
     echo "--------------------------"
